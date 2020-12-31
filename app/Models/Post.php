@@ -9,6 +9,10 @@ class Post extends Model
 {
     use HasFactory;
 
+    public function author() {
+        return $this->belongsTO(User::class);
+    }
+
     public function getImageUrlAttribute($value){
         $imageUrl = '';
 
@@ -18,5 +22,9 @@ class Post extends Model
         }
 
         return $imageUrl;
+    }
+
+    public function getDateAttribute(){
+        return created_at->diffForHumans();
     }
 }
