@@ -13,7 +13,7 @@ use App\Http\Controllers\BlogController;
 |
 */
 
-Route::get('/', [BlogController::class, 'index']);
+Route::get('/', [BlogController::class, 'index'])->name('welcome.page');
 
 Route::get('/blog/post/show', function () {
     return view('blog.show');

@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     public function index(){
-        $posts = Post::with('author')->latest()->paginate(4);
+        // $posts = Post::all();
+        $posts = Post::with('user')->latest()->published()->paginate(4);
         return view('blog.index', compact('posts'));
     }
 }
