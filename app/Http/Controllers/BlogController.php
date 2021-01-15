@@ -12,4 +12,9 @@ class BlogController extends Controller
         $posts = Post::with('user')->latest()->published()->paginate(4);
         return view('blog.index', compact('posts'));
     }
+
+    public function show($id){
+        $post = Post::findOrFail($id);
+        return view('blog.show', compact('post'));
+    }
 }

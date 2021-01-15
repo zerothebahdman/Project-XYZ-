@@ -15,9 +15,7 @@ use App\Http\Controllers\BlogController;
 
 Route::get('/', [BlogController::class, 'index'])->name('welcome.page');
 
-Route::get('/blog/post/show', function () {
-    return view('blog.show');
-})->name('show.blog.post');
+Route::get('/blog/post/{show}', [BlogController::class, 'show'])->name('show.blog.post');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
