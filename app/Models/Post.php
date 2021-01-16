@@ -56,12 +56,12 @@ class Post extends Model
     // Using the laravel markdown package to easily format html data from the database
     public function getBodyHtmlAttribute($value)
     {
-        return this->body ? Markdown::convertToHtml(e($post->body)) : NULL;
+        return $this->body ? Markdown::convertToHtml(e($this->body)) : NULL;
     }
 
     // Using the laravel markdown package to easily format html data from the database
     public function getExcerptHtmlAttribute($value)
     {
-        return this->excerpt ? Markdown::convertToHtml(e($post->excerpt)) : NULL;
+        return $this->excerpt ? Markdown::convertToHtml(e($this->excerpt)) : NULL;
     }
 }
