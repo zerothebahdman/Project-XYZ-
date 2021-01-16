@@ -8,6 +8,7 @@
                     <div class="post-item-image">
                         @if ($post->image_url)
                             <a href="#">
+                                {{-- Created an accessor in the post model called image_url to get the image from the database --}}
                             <img src="{{ $post->image_url }}" alt="{{ $post->title }}">
                         </a>
                         @endif
@@ -19,14 +20,18 @@
 
                             <div class="post-meta no-border">
                                 <ul class="post-meta-group">
-                                    <li><i class="fa fa-user"></i><a href="#">{{ $post->user->name }}</a></li>
+                                    <li><i class="fa fa-user"></i>
+                                        {{-- Created a relationship in the post model called user to access the user name and display it   --}}
+                                        <a href="#">{{ $post->user->name }}</a>
+                                    </li>
                                     <li><i class="fa fa-clock-o"></i><time> {{ $post->date }}</time></li>
                                     <li><i class="fa fa-tags"></i><a href="#"> Blog</a></li>
                                     <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
                                 </ul>
                             </div>
 
-                            {{ $post->body }}
+                            {{-- Created a new accessor in the post model to display the post body --}}
+                            {!! $post->body_html !!}
                         </div>
                     </div>
                 </article>
