@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Post;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 use Illuminate\Http\Request;
 
@@ -13,8 +14,10 @@ class BlogController extends Controller
         return view('blog.index', compact('posts'));
     }
 
-    public function show($id){
-        $post = Post::findOrFail($id);
-        return view('blog.show', compact('post'));
+    public function show($slug){
+        $post = Post::published()->where('slug', $slug)->first();
+        // $post = Post::published()->findOrFail($id);
+        // return $post->title;
+        return view('blog.show', ['post' => $post]);
     }
 }

@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class Post extends Model
 {
     use HasFactory;
+    use Sluggable, SluggableScopeHelpers;
 
     protected $dates = ['published_at'];
     public function user() {
@@ -34,5 +37,18 @@ class Post extends Model
     // Get blog posts that has been published
     public function scopePublished($query){
         return $query->where('published_at', '<=', Carbon::now());
+    }
+
+    public function sluggable(): array{
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
+     public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }
