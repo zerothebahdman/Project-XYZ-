@@ -33,12 +33,13 @@ class BlogController extends Controller
         //  dd(\DB::getQueryLog());
     }
 
-    public function show($slug){
+    public function show(Post $post, $slug){
          // In order to have less code in this controller to display the categories I created a ComposerServiceProvider in the Providers folder and registered it app.php in the config folder where they have the provider class.
 
+        //  Incremets the view_count column on the database if the user clicks on a post
+        $post->increment('view_count');
+
         $post = Post::published()->where('slug', $slug)->first();
-        // $post = Post::published()->findOrFail($id);
-        // return $post->title;
         return view('blog.show', ['post' => $post]);
     }
 
