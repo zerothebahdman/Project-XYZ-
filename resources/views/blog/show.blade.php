@@ -54,13 +54,11 @@
                             <div class="post-author-count">
                                 <a href="{{ route('author', $post->user->slug) }}">
                                     <i class="fa fa-clone"></i>
-                                    @php $postCount = $post->user->posts->count() @endphp
+                                    @php $postCount = $post->user->posts()->published()->count() @endphp
                                     {{ $postCount }} {{ Str::plural('post', $postCount) }}
                                 </a>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad aut sunt cum, mollitia
-                                excepturi neque sint magnam minus aliquam, voluptatem, labore quis praesentium eum quae
-                                dolorum temporibus consequuntur! Non.</p>
+                            {!! $post->user->bio_html !!}
                         </div>
                     </div>
                 </article>

@@ -8,7 +8,7 @@
                     <div class="alert alert-danger text-center">
                         <p><strong>Nothing Found :(</strong></p>
                     </div>
-                    <img src="{{ asset('img/404.svg') }}" width="90%" alt="">
+                    <img src="{{ asset('img/not_found.svg') }}" width="90%" alt="">
                 @else
                     @if (isset($categoryName))
                         <div class="alert alert-info text-center">

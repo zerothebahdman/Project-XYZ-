@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory;
 
 class UsersTableSeeder extends Seeder
 {
@@ -19,24 +20,28 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->truncate();
 
         // generate 3 users/ authors
+        $faker = Factory::create();
         DB::table('users')->insert([
             [
                 'name' => "John Doe",
                 'email' => "johndoe@me.com",
                 'slug' => 'john-doe',
                 'password' => bcrypt('test@1234'),
+                'bio' => $faker->text(rand(250, 300))
             ],
             [
                 'name' => "Admin",
                 'email' => "admin@me.com",
                 'slug' => "admin",
                 'password' => bcrypt('test@1234'),
+                'bio' => $faker->text(rand(250, 300))
             ],
             [
                 'name' => "Divine",
                 'email' => "divine@me.com",
                 'slug' => 'divine',
                 'password' => bcrypt('test@1234'),
+                'bio' => $faker->text(rand(250, 300))
             ],
         ]);
     }
