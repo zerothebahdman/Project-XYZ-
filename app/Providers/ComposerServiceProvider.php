@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
+use App\Models\Post;
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -31,6 +32,12 @@ class ComposerServiceProvider extends ServiceProvider
             }])->orderBy('title', 'asc')->get();
 
             return $view->with('categories', $categories);
+        });
+
+        view()->composer('layouts.sidebar', function($view) {
+            $popularPosts = Post::published()->popular()->take(4)->get();
+
+            return $view->with('popularPosts', $popularPosts);
         });
     }
 }
