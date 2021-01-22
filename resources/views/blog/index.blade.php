@@ -15,6 +15,11 @@
                             <p><strong>Category: {{ $categoryName }}</strong></p>
                         </div>
                     @endif
+                    @if (isset($authorName))
+                        <div class="alert alert-info text-center">
+                            <p><strong>Author: {{ $authorName }}</strong></p>
+                        </div>
+                    @endif
                     @foreach ($posts as $post)
                         <article class="post-item">
                             @if ($post->image_url)
@@ -37,9 +42,8 @@
                                     <div class="pull-left">
                                         <ul class="post-meta-group">
                                             <li><i class="fa fa-user"></i>
-                                                {{-- <a href="#"> {{ $post->user->name }}</a>
-                                                --}}
-
+                                                <a href="{{ route('author', $post->user->slug) }}">
+                                                    {{ $post->user->name }}</a>
                                             </li>
                                             <li><i class="fa fa-clock-o"></i><time> {{ $post->date }}</time></li>
                                             <li><i class="fa fa-folder"></i>

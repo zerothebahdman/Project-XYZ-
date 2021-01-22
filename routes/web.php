@@ -23,6 +23,8 @@ Route::get('/blog/post/{slug}', [BlogController::class, 'show'])->name('show.blo
 
 Route::get('/blog/post/category/{category}', [BlogController::class, 'category'])->name('category');
 
+Route::get('/blog/post/author/{user}', [BlogController::class, 'author'])->name('author');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');

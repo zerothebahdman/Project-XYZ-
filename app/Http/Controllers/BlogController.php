@@ -21,7 +21,6 @@ class BlogController extends Controller
     }
 
     public function category(Category $category){
-        // $posts = Post::all();
         $categoryName = $category->title;
 
         // In order to have less code in this controller to display the categories I created a ComposerServiceProvider in the Providers folder and registered it app.php in the config folder where they have the provider class.
@@ -41,5 +40,18 @@ class BlogController extends Controller
         // $post = Post::published()->findOrFail($id);
         // return $post->title;
         return view('blog.show', ['post' => $post]);
+    }
+
+    public function author(User $user) {
+        $authorName = $user->name;
+
+        // In order to have less code in this controller to display the categories I created a ComposerServiceProvider in the Providers folder and registered it app.php in the config folder where they have the provider class.
+
+        // \DB::enableQueryLog();
+        $posts = $user->posts()->with('category')->latest()->published()->paginate(3);
+
+        return view("blog.index", compact('posts', 'authorName'));//->render();
+
+        //  dd(\DB::getQueryLog());
     }
 }
