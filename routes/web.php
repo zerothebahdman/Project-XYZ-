@@ -21,6 +21,8 @@ Route::get('/', [BlogController::class, 'index'])->name('welcome.page');
 
 Route::get('/blog/post/{slug}', [BlogController::class, 'show'])->name('show.blog.post');
 
+Route::get('/blog/post/category/{category}', [BlogController::class, 'category'])->name('category');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');

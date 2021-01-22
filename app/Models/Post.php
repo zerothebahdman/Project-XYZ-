@@ -16,8 +16,18 @@ class Post extends Model
     use Sluggable, SluggableScopeHelpers;
 
     protected $dates = ['published_at'];
+
     public function user() {
         return $this->belongsTO(User::class);
+    }
+
+    // We are trying to create a relationship between the users table and the categories table
+    // public function user(){
+    //     return $this->hasOne(User::class, 'id', 'user_id');
+    // }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
 
     public function getImageUrlAttribute($value){
@@ -43,12 +53,12 @@ class Post extends Model
     public function sluggable(): array{
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'slug'
             ]
         ];
     }
 
-     public function getRouteKeyName(): string
+     public function getRouteKeyName()
     {
         return 'slug';
     }

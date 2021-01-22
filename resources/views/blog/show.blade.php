@@ -22,7 +22,7 @@
                                 <ul class="post-meta-group">
                                     <li><i class="fa fa-user"></i>
                                         {{-- Created a relationship in the post model called user to access the user name and display it   --}}
-                                        <a href="#">{{ $post->user->name }}</a>
+                                        {{-- <a href="#">{{ $post->user->name }}</a> --}}
                                     </li>
                                     <li><i class="fa fa-clock-o"></i><time> {{ $post->date }}</time></li>
                                     <li><i class="fa fa-tags"></i><a href="#"> Blog</a></li>
@@ -44,7 +44,7 @@
                         </a>
                       </div>
                       <div class="media-body">
-                        <h4 class="media-heading"><a href="#">{{ $post->user->name }}</a></h4>
+                        {{-- <h4 class="media-heading"><a href="#">{{ $post->user->name }}</a></h4> --}}
                         <div class="post-author-count">
                           <a href="#">
                               <i class="fa fa-clone"></i>
