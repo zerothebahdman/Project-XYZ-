@@ -38,6 +38,7 @@
                         <li class="active"><a href="{{ route('welcome.page') }}">Blog</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
+                        <li><a href="{{ url('/login') }}">Login</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container -->
