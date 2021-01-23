@@ -1,8 +1,12 @@
+html{
+    position: relative;
+    min-height: 100%;
+}
 body {
     font-family: 'Raleway', sans-serif;
     padding-top: 70px;
     color: #777;
-
+    margin-bottom: 60px;
     background: #fcfcfc  url("../img/body-bg.png");
 }
 
@@ -301,6 +305,9 @@ ul.tags li a:hover {
 footer {
     border-top: 1px solid #e7e7e7;
     padding: 15px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 footer p {
