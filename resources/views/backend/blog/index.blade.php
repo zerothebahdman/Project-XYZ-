@@ -11,7 +11,13 @@
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1 class="m-0">Blog</h1>
-                        <small>Display all blog posts</small>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="{{ 'backend.index' }}">Blog</a></li>
+                            <li class="breadcrumb-item active">All Blog Posts</li>
+                        </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -98,72 +104,66 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                            {{-- <div class="card-header">
-                                <h3 class="card-title">Responsive Hover Table</h3>
-
+                            <div class="card-header">
                                 <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                            placeholder="Search">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                    <a href="{{ route('backend.create') }}" class="btn btn-primary">Add New Post</a>
                                 </div>
-                            </div> --}}
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-bordered table-striped table-hover table-responsive">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">S/N</th>
-                                            <th scope="col">Title</th>
-                                            <th scope="col">Author</th>
-                                            <th width="150">Category</th>
-                                            <th width="170">Date</th>
-                                            <th width="130">Action</th>
-                                        </tr>
-                                    </thead>
-
-                                    @foreach ($posts as $post)
-                                        <tr>
-                                            <td>{{ $posts->firstItem() + $loop->index }}</td>
-                                            <td>{{ $post->title }} </td>
-                                            <td>{{ $post->user->name }}</td>
-                                            <td><span class="tag tag-success">{{ $post->category->title }}</span></td>
-                                            <td>
-                                                <abbr
-                                                    title="{{ $post->dateFormatted(true) }}">{{ $post->dateFormatted() }}</abbr>
-                                                |
-                                                {!! $post->publicationLabel() !!}
-                                            </td>
-                                            <td>
-                                                <a href="{{ route('backend.edit', $post->id) }}"
-                                                    class="btn btn-primary btn-sm">
-                                                    <i class="fas fa-edit"></i>
-                                                </a>
-                                                <a href="{{ route('backend.destroy', $post->id) }}"
-                                                    class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
                             </div>
+                            <!-- /.card-header -->
+                            @if (!$posts->count())
+                                <div class="alert alert-danger text-center">
+                                    <strong>No Record Found</strong>
+                                </div>
+                            @else
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-bordered table-striped table-hover table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">S/N</th>
+                                                <th scope="col">Title</th>
+                                                <th scope="col">Author</th>
+                                                <th width="150">Category</th>
+                                                <th width="170">Date</th>
+                                                <th width="130">Action</th>
+                                            </tr>
+                                        </thead>
+                                        @foreach ($posts as $post)
+                                            <tr>
+                                                <td>{{ $posts->firstItem() + $loop->index }}</td>
+                                                <td>{{ $post->title }} </td>
+                                                <td>{{ $post->user->name }}</td>
+                                                <td><span class="tag tag-success">{{ $post->category->title }}</span></td>
+                                                <td>
+                                                    <abbr
+                                                        title="{{ $post->dateFormatted(true) }}">{{ $post->dateFormatted() }}</abbr>
+                                                    |
+                                                    {!! $post->publicationLabel() !!}
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('backend.edit', $post->id) }}"
+                                                        class="btn btn-primary btn-sm">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <a href="{{ route('backend.destroy', $post->id) }}"
+                                                        class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
                             <!-- /.card-body -->
                             <div class="card-footer clearfix">
-                                <ul class="float-left">
+                                <ul class="pagination float-left">
                                     {!! $posts->links() !!}
                                 </ul>
                                 <div class="float-right">
                                     <button type="button" class="btn btn-primary btn-sm">
-                                        {{ Str::plural('Items', $posts->count()) }}
-                                        <span class="badge bg-light">{{ $posts->count() }}</span>
+                                        {{ Str::plural('Items', $postCount) }}
+                                        <span class="badge bg-light">{{ $postCount }}</span>
                                     </button>
                                 </div>
                             </div>
@@ -173,8 +173,15 @@
                 </div>
             </div>
             <!-- /.row (main row) -->
+        </section>
     </div><!-- /.container-fluid -->
-    </section>
     <!-- /.content -->
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        $('ul.pagination').addClass('no-margin pagination-sm');
+
+    </script>
 @endsection
