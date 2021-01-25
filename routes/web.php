@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\Backend\BackendBlogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +13,10 @@ use App\Http\Controllers\BlogController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
 Route::get('/', [BlogController::class, 'index'])->name('welcome.page');
 
@@ -25,6 +30,4 @@ Route::get('/blog/post/category/{category}', [BlogController::class, 'category']
 
 Route::get('/blog/post/author/{user}', [BlogController::class, 'author'])->name('author');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::resource('/blog/backend', BackendBlogController::class);
