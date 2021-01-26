@@ -27,7 +27,10 @@
     <!-- Daterange picker -->
     <link rel="stylesheet" href="{{ asset('backend/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
-    <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/plugins/summernote/summernote-bs4.min.css') }}">
+    {{-- simlemde --}}
+    <link rel="stylesheet" href="{{ asset('backend/plugins/simplemd/simplemde.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/css/custom.css') }}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
@@ -72,9 +75,6 @@
     <script src="{{ asset('backend/plugins/chart.js/Chart.min.js') }}"></script>
     <!-- Sparkline -->
     <script src="{{ asset('backend/plugins/sparklines/sparkline.js') }}"></script>
-    <!-- JQVMap -->
-    <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
     <!-- jQuery Knob Chart -->
     <script src="{{ asset('backend/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
     <!-- daterangepicker -->
@@ -86,6 +86,8 @@
     <script src="{{ asset('backend/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <!-- overlayScrollbars -->
     <script src="{{ asset('backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
+    <!-- simplemde -->
+    <script src="{{ asset('backend/plugins/simplemd/simplemde.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('backend/js/adminlte.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
