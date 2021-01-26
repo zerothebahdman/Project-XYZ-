@@ -7,7 +7,7 @@
                 <article class="post-item post-detail">
                     <div class="post-item-image">
                         @if ($post->image_url)
-                            <a href="#">
+                            <a href="javascript:;">
                                 {{-- Created an accessor in the post model called image_url to
                                 get the image from the database --}}
                                 <img src="{{ $post->image_url }}" alt="{{ $post->title }}">

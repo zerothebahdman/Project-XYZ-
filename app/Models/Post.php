@@ -16,7 +16,7 @@ class Post extends Model
     use HasFactory;
     use Sluggable, SluggableScopeHelpers;
 
-    protected $fillable = ['view_count'];
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'category_id', 'published_at', 'image'];
 
     protected $dates = ['published_at'];
 
@@ -42,6 +42,11 @@ class Post extends Model
         }
 
         return $imageUrl;
+    }
+
+    public function setPublishedAtAttribute($value)
+    {
+        $this->attributes['published_at'] = $value ? : NULL;
     }
 
     public function getimageThumbnailUrlAttribute($value){

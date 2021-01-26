@@ -15,7 +15,7 @@
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item"><a href="{{ 'backend.index' }}">Blog</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('backend.index') }}">Blog</a></li>
                             <li class="breadcrumb-item active">All Blog Posts</li>
                         </ol>
                     </div><!-- /.col -->
@@ -103,6 +103,15 @@
                 <!-- Main row -->
                 <div class="row">
                     <div class="col-12">
+                        @if (session('success'))
+                            <div class="alert mt-2 alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('success') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                        @endif
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-tools">

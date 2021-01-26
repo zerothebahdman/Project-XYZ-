@@ -8,6 +8,12 @@ use App\Models\Post;
 
 class BackendBlogController extends Controller
 {
+    protected $uploadPath;
+
+    public function __construct()
+    {
+        $this->uploadPath = public_path('img');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,9 +31,9 @@ class BackendBlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Post $post)
     {
-        dd('create new blog post');
+        return view('backend.blog.create', compact('post'));
     }
 
     /**
@@ -38,7 +44,48 @@ class BackendBlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'bail|required',
+            'slug' => 'bail|required|unique:posts',
+            'body' => 'bail|required',
+            'category_id' => 'bail|required',
+            'excerpt' => 'bail|required',
+            'image' => 'mimes:jpg,bmp,png,jpeg'
+            // 'published_at' => 'bail|date_format:Y-m-d H:i:s',
+        ]);
+
+        $data = $this->handleRequest($request);
+        $request->user()->posts()->create($data);
+
+        return redirect(route('backend.index'))->with('success', 'Your post was created successfully :)');
+    }
+
+    private function handleRequest($request)
+    {
+        $data = $request->all();
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = hexdec(uniqid());
+            $imageExt = strtolower($image->getClientOriginalExtension());
+            $fileName = $imageName. '.' .$imageExt;
+            $destination = $this->uploadPath;
+
+            $image->move($destination, $fileName);
+
+            $data['image'] = $fileName;
+        }
+
+        // $fileName = hexdec(uniqid());
+        //     $image_ext = strtolower($image->getClientOriginalExtension());
+        //     $imageName = $fileName. '.' .$image_ext;
+        //     $uploadPath = 'img/posts-image/';
+        //     $saveImageToServer = $uploadPath.$imageName;
+        //     $image->move($uploadPath, $imageName);
+
+        //     $data['image'] = $saveImageToServer;
+
+        return $data;
     }
 
     /**
