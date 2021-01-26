@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Intervention\Image\Facades\Image;
 
 class BackendBlogController extends Controller
 {
@@ -71,7 +72,13 @@ class BackendBlogController extends Controller
             $fileName = $imageName. '.' .$imageExt;
             $destination = $this->uploadPath;
 
-            $image->move($destination, $fileName);
+            $successUploaded = $image->move($destination, $fileName);
+
+            if ($successUploaded) {
+                $thumbnail = str_replace(".{$imageExt}", "_thumb.{$imageExt}", $fileName);
+
+                Image::make($destination . '/' . $fileName)->resize(250, 170)->save($destination . '/' . $thumbnail);
+            }
 
             $data['image'] = $fileName;
         }
